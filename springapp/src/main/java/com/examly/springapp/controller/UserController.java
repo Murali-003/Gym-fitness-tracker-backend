@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
-@CrossOrigin(origins = "http://localhost:8081") 
+@CrossOrigin(origins = "https://gym-fitness-management-a3t7.vercel.app/auth") 
 @RestController
 @RequestMapping("/api/users")
 public class UserController 

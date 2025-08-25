@@ -75,7 +75,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:8081")
+@CrossOrigin(origins = "https://gym-fitness-management-a3t7.vercel.app/auth")
 @RequestMapping("/api/workout-plans/{planId}/exercises")
 public class ExerciseController {
     public static final String VALIDATION_FAILED = "Validation failed";
