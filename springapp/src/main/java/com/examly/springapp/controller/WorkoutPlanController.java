@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@CrossOrigin(origins = "https://gym-fitness-management-a3t7.vercel.app/auth")
+@CrossOrigin(origins = "https://gym-fitness-management-a3t7.vercel.app")
 @RequestMapping("/api/workout-plans")
 public class WorkoutPlanController {
 
