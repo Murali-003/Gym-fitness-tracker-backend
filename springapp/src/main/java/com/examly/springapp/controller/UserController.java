@@ -36,37 +36,26 @@ public class UserController
         return ResponseEntity.ok(userService.getMembersForTrainer(trainerId));
     }
 
-    // @PostMapping("/register")
-    // public ResponseEntity<?> register(@RequestBody User user) {
-    //     try {
-    //         User saved = userService.register(user);
-            
-    //         // Return different messages based on role and approval status
-    //         String message;
-    //         if (saved.getRole() == Role.MEMBER) {
-    //             message = "Member registered successfully! You can now login.";
-    //         } else if (saved.getRole() == Role.TRAINER) {
-    //             message = "Trainer registration submitted successfully! Awaiting admin approval.";
-    //         } else {
-    //             message = "Admin registration submitted successfully! Awaiting approval.";
-    //         }
-            
-    //         return ResponseEntity.status(HttpStatus.CREATED)
-    //             .body(Map.of("message", message, "user", saved));
-    //     } catch (Exception e) {
-    //         return ResponseEntity.badRequest().body(Map.of("message", e.getMessage()));
-    //     }
-    // }
     @PostMapping("/register")
-    public ResponseEntity<?> register(@Valid @RequestBody User user) {
-        User saved = userService.register(user);
-        String message = switch (saved.getRole()) {
-            case MEMBER -> "Member registered successfully! You can now login.";
-            case TRAINER -> "Trainer registration submitted successfully! Awaiting admin approval.";
-            default -> "Admin registration submitted successfully! Awaiting approval.";
-        };
-        return ResponseEntity.status(HttpStatus.CREATED)
+    public ResponseEntity<?> register(@RequestBody User user) {
+        try {
+            User saved = userService.register(user);
+            
+            // Return different messages based on role and approval status
+            String message;
+            if (saved.getRole() == Role.MEMBER) {
+                message = "Member registered successfully! You can now login.";
+            } else if (saved.getRole() == Role.TRAINER) {
+                message = "Trainer registration submitted successfully! Awaiting admin approval.";
+            } else {
+                message = "Admin registration submitted successfully! Awaiting approval.";
+            }
+            
+            return ResponseEntity.status(HttpStatus.CREATED)
                 .body(Map.of("message", message, "user", saved));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(Map.of("message", e.getMessage()));
+        }
     }
 
     @PostMapping("/login")
